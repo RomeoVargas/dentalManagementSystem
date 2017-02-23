@@ -12,7 +12,6 @@
 
         <!-- Custom CSS -->
         <link href="{{ asset('css/simple-sidebar.css') }}" rel="stylesheet">
-        {{--<link href="{{ asset('css/customer/main.css') }}" rel="stylesheet">--}}
 
     </head>
     <body>
@@ -68,35 +67,4 @@
     </script>
 
     </body>
-
-    {{--<body>--}}
-        {{--@yield('header')--}}
-
-        {{--<div class="container">--}}
-            {{--@yield('sidebar')--}}
-            {{--@if($error = session('error'))--}}
-                {{--<div class="alert alert-danger alert-dismissible fade in" role="alert">--}}
-                    {{--<button type="button" class="close" data-dismiss="alert" aria-label="Close">--}}
-                        {{--<span aria-hidden="true">×</span>--}}
-                    {{--</button>--}}
-                    {{--<strong>{{ $error }}</strong>--}}
-                {{--</div>--}}
-            {{--@elseif($success = session('success'))--}}
-                {{--<div class="alert alert-success alert-dismissible fade in" role="alert">--}}
-                    {{--<button type="button" class="close" data-dismiss="alert" aria-label="Close">--}}
-                        {{--<span aria-hidden="true">×</span>--}}
-                    {{--</button>--}}
-                    {{--<strong>{{ $success }}</strong>--}}
-                {{--</div>--}}
-            {{--@endif--}}
-            {{--@yield('content')--}}
-        {{--</div>--}}
-
-        {{--@yield('footer')--}}
-        {{--@yield('modal')--}}
-        {{--<script src="{{ asset('js/main.js') }}"></script>--}}
-
-        {{--@yield('generalCustomJs')--}}
-        {{--@yield('specificCustomJs')--}}
-    {{--</body>--}}
 </html>
