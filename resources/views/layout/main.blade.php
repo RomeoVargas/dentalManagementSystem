@@ -18,7 +18,6 @@
     <body>
 
     <div id="wrapper">
-
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
@@ -27,28 +26,16 @@
                         ADA Dental Clinic
                     </a>
                 </li>
-                <li>
-                    <a href="#"><i class="glyphicon glyphicon-dashboard"></i>&nbsp Dashboard</a>
-                </li>
-                <li>
-                    <a href="#"><i class="glyphicon glyphicon-calendar"></i>&nbsp Appointments</a>
-                </li>
-                <li>
-                    <a href="#"><i class="glyphicon glyphicon-user"></i>&nbsp Doctors</a>
-                    <a href="#">
-                        <ul>
-                            <li>
-                                <i class="glyphicon glyphicon-time"></i>&nbsp Doctor Schedules
-                            </li>
-                        </ul>
-                    </a>
-                </li>
-                <li>
-                    <a href="#"><i class="glyphicon glyphicon-heart-empty"></i>&nbsp Nurses</a>
-                </li>
-                <li>
-                    <a href="#"><i class="glyphicon glyphicon-log-out"></i>&nbsp Logout</a>
-                </li>
+                @php($routePortal = explode('/', get_route_name())[0])
+                @if($routePortal == 'admin')
+                    @include('partial.sidebar.admin')
+                @elseif($routePortal == 'dentist')
+                    @include('partial.sidebar.dentist')
+                @elseif($routePortal == 'staff')
+                    @include('partial.sidebar.staff')
+                @else
+                    @include('partial.sidebar.patient')
+                @endif
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->

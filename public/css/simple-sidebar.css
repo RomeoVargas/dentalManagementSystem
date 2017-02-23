@@ -68,7 +68,7 @@ body {
 }
 
 .sidebar-nav li {
-    text-indent: 20px;
+    text-indent: 15px;
     line-height: 40px;
 }
 
@@ -90,7 +90,7 @@ body {
 }
 
 .sidebar-nav > .sidebar-brand {
-    height: 65px;
+    height: 50px;
     font-size: 18px;
     line-height: 60px;
 }

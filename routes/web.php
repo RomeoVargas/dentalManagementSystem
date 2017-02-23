@@ -14,3 +14,12 @@
 Route::get('/', function () {
     return view('admin.dashboard');
 });
+Route::get('/admin', function () {
+    return view('admin.dashboard');
+});
+Route::get('/dentist', function () {
+    return view('admin.dashboard');
+});
+Route::get('/staff', function () {
+    return view('admin.dashboard');
+});
