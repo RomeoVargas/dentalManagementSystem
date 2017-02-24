@@ -11,12 +11,36 @@
 |
 */
 
+
+// PATIENT RELATED PAGES
 Route::get('/', function () {
+    return redirect('home');
+});
+Route::get('/home', function () {
+    return view('patient.home');
+});
+Route::get('/appointments', function () {
+    return view('patient.appointments');
+});
+Route::get('/schedules', function () {
+    return view('patient.dentistSchedule');
+});
+Route::get('/my-info', function () {
+    return view('patient.patientRecord');
+});
+
+// ADMIN RELATED PAGES
+Route::get('admin', function () {
+    return redirect('admin/dashboard');
+});
+Route::get('admin/dashboard', function () {
     return view('admin.dashboard');
 });
-Route::get('/admin', function () {
-    return view('admin.dashboard');
+Route::get('admin/dentists', function () {
+    return view('admin.dentists');
 });
+
+
 Route::get('/dentist', function () {
     return view('admin.dashboard');
 });

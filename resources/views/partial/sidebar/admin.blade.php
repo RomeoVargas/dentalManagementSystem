@@ -1,11 +1,8 @@
 <li>
-    <a href="#"><i class="glyphicon glyphicon-dashboard"></i>&nbsp Dashboard</a>
+    <a href="{{ url('admin/dashboard') }}"><i class="glyphicon glyphicon-dashboard"></i>&nbsp Dashboard</a>
 </li>
 <li>
-    <a href="#"><i class="glyphicon glyphicon-calendar"></i>&nbsp Appointments</a>
-</li>
-<li>
-    <a href="#"><i class="glyphicon glyphicon-user"></i>&nbsp Dentists</a>
+    <a href="{{ url('admin/dentists') }}"><i class="glyphicon glyphicon-user"></i>&nbsp Dentists</a>
     <a href="#">
         <ul>
             <li>
@@ -15,7 +12,10 @@
     </a>
 </li>
 <li>
-    <a href="#"><i class="glyphicon glyphicon-modal-window"></i>&nbsp Staff</a>
+    <a href="#"><i class="glyphicon glyphicon-modal-window"></i>&nbsp Staffs</a>
+</li>
+<li>
+    <a href="#"><i class="glyphicon glyphicon-map-marker"></i>&nbsp Branches</a>
 </li>
 <li>
     <a href="#"><i class="glyphicon glyphicon-list-alt"></i>&nbsp Reports</a>
