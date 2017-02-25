@@ -15,10 +15,8 @@ class CreateBranchTable extends Migration
     {
         Schema::create('branch', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();
+            $table->string('name', \App\Models\Branch::MAX_LENGTH_NAME)->unique();
             $table->string('address');
-            $table->string('latitude');
-            $table->string('longitude');
             $table->timestamps();
         });
     }

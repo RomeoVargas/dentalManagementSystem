@@ -12,6 +12,7 @@
 
         <!-- Custom CSS -->
         <link href="{{ asset('css/simple-sidebar.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/main.css') }}" rel="stylesheet">
 
     </head>
     <body>
@@ -25,7 +26,10 @@
                         ADA Dental Clinic
                     </a>
                 </li>
-                @php($routePortal = explode('/', get_route_name())[0])
+                @php
+                    $routeName = trim(get_route_name(), '/');
+                    $routePortal = explode('/', $routeName)[0];
+                @endphp
                 @if($routePortal == 'admin')
                     @include('partial.sidebar.admin')
                 @elseif($routePortal == 'dentist')
@@ -43,7 +47,22 @@
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-11">
+                        @if($error = session('error'))
+                            <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                                <strong>{{ $error }}</strong>
+                            </div>
+                        @elseif($success = session('success'))
+                            <div class="alert alert-success alert-dismissible fade in" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                                <strong>{{ $success }}</strong>
+                            </div>
+                        @endif
                         @yield('content')
                     </div>
                 </div>
@@ -54,10 +73,12 @@
     </div>
     <!-- /#wrapper -->
 
+    @yield('modal')
 
     <!-- JAVASCRIPT -->
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
     <!-- Menu Toggle Script -->
     <script>
         $("#menu-toggle").click(function(e) {
@@ -66,5 +87,7 @@
         });
     </script>
 
+    @yield('generalCustomJs')
+    @yield('specificCustomJs')
     </body>
 </html>

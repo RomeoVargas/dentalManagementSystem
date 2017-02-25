@@ -4,13 +4,18 @@ namespace App\Models;
 
 class User
 {
+    const MAX_LENGTH_EMAIL = 50;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'auth_type',
+        'name',
+        'email',
+        'password',
     ];
 
     /**

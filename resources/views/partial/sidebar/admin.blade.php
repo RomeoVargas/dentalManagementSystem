@@ -1,8 +1,14 @@
 <li>
-    <a href="{{ url('admin/dashboard') }}"><i class="glyphicon glyphicon-dashboard"></i>&nbsp Dashboard</a>
+    @php($activeUrl = 'admin/dashboard')
+    <a class="{{ $activeUrl != $routeName ?: 'active' }}" href="{{ url($activeUrl) }}">
+        <i class="glyphicon glyphicon-dashboard"></i>&nbsp Dashboard
+    </a>
 </li>
 <li>
-    <a href="{{ url('admin/dentists') }}"><i class="glyphicon glyphicon-user"></i>&nbsp Dentists</a>
+    @php($activeUrl = 'admin/dentists')
+    <a class="{{ $activeUrl != $routeName ?: 'active' }}" href="{{ url($activeUrl) }}">
+        <i class="glyphicon glyphicon-user"></i>&nbsp Dentists
+    </a>
     <a href="#">
         <ul>
             <li>
@@ -15,7 +21,10 @@
     <a href="#"><i class="glyphicon glyphicon-modal-window"></i>&nbsp Staffs</a>
 </li>
 <li>
-    <a href="#"><i class="glyphicon glyphicon-map-marker"></i>&nbsp Branches</a>
+    @php($activeUrl = 'admin/branches')
+    <a class="{{ $activeUrl != $routeName ?: 'active' }}" href="{{ url($activeUrl) }}">
+        <i class="glyphicon glyphicon-map-marker"></i>&nbsp Branches
+    </a>
 </li>
 <li>
     <a href="#"><i class="glyphicon glyphicon-list-alt"></i>&nbsp Reports</a>
