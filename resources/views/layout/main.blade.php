@@ -6,12 +6,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- CSS -->
-        <link href="{{ asset('css/bootstrap-theme.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/bootstrap/bootstrap-theme.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
 
 
         <!-- Custom CSS -->
         <link href="{{ asset('css/simple-sidebar.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/file-input/fileinput.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/file-input/avatar-upload.css') }}" rel="stylesheet">
         <link href="{{ asset('css/main.css') }}" rel="stylesheet">
 
     </head>
@@ -89,5 +91,8 @@
 
     @yield('generalCustomJs')
     @yield('specificCustomJs')
+
+    <script src="{{ asset('js/file-input/fileinput.min.js') }}"></script>
+    <script src="{{ asset('js/file-input/avatar-upload.min.js') }}"></script>
     </body>
 </html>

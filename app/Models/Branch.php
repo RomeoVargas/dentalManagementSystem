@@ -15,4 +15,14 @@ class Branch extends AppModel
         'name',
         'address',
     ];
+
+    public function getStaffs()
+    {
+        return $this->hasMany(Staff::class, 'branch_id')->getResults();
+    }
+
+    public function getDentists()
+    {
+        return $this->hasMany(Dentist::class, 'branch_id')->getResults();
+    }
 }

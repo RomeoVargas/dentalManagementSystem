@@ -39,6 +39,7 @@ Route::get('admin/dashboard', function () {
 Route::get('admin/dentists', function () {
     return view('admin.dentists');
 });
+Route::get('admin/staffs', 'Admin\StaffController@getAll');
 Route::get('admin/branches', 'Admin\BranchController@getAll');
 Route::post('admin/branches/add', 'Admin\BranchController@create');
 
