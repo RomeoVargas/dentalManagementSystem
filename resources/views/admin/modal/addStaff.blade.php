@@ -28,30 +28,47 @@
                         </div>
 
                         <hr/>
-                        <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                            <label class="col-sm-2 control-label">Name</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="name" placeholder="Full Name" value="{{ old('name') }}">
-                                {!! $errors->first('name', "<p class='help-block'>:message</p>") !!}
+                        <div class="col-sm-4">
+                            <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
+                                <div class="col-sm-12">
+                                    <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                        <div class="fileinput-new thumbnail" style="width: 150px; height: 150px;">
+                                            <img src="{{ asset('img/no-avatar.jpg') }}" alt="...">
+                                        </div>
+                                        <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                                        <div>
+                                            <span class="btn btn-default btn-file">
+                                                <span class="fileinput-new">Select image</span>
+                                                <span class="fileinput-exists">Change</span>
+                                                <input type="file" accept=".jpg,.jpeg,.png" name="image">
+                                            </span>
+                                            <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {!! $errors->first('image', '<p class="help-block col-sm-offset-2 col-sm-10">:message</p>') !!}
                             </div>
                         </div>
-                        <div class="form-group {{ $errors->has('branch') ? 'has-error' : '' }}">
-                            <label class="col-sm-2 control-label">Branch</label>
-                            <div class="col-sm-10">
-                                @php($branches = \App\Models\Branch::all())
-                                <select name="branch" class="form-control">
-                                    @foreach($branches as $branch)
-                                        <option value="{{ $branch->id }}">{{ $branch->name }}</option>
-                                    @endforeach
-                                </select>
+                        <div class="col-sm-offset-1 col-sm-7 text-left">
+                            <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
+                                <label class="col-sm-2 control-label">Name</label>
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control" name="name" placeholder="Full Name" value="{{ old('name') }}">
+                                    {!! $errors->first('name', "<p class='help-block'>:message</p>") !!}
+                                </div>
                             </div>
-                            {!! $errors->first('branch', '<p class="help-block col-sm-offset-2 col-sm-10">:message</p>') !!}
-                        </div>
-                        <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
-                            <label class="col-sm-2 control-label">Avatar</label>
-                            <div class="col-sm-10">
+                            <div class="form-group {{ $errors->has('branch') ? 'has-error' : '' }}">
+                                <label class="col-sm-2 control-label">Branch</label>
+                                <div class="col-sm-12">
+                                    @php($branches = \App\Models\Branch::all())
+                                    <select name="branch" class="form-control">
+                                        @foreach($branches as $branch)
+                                            <option value="{{ $branch->id }}">{{ $branch->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                {!! $errors->first('branch', '<p class="help-block col-sm-offset-2 col-sm-10">:message</p>') !!}
                             </div>
-                            {!! $errors->first('image', '<p class="help-block col-sm-offset-2 col-sm-10">:message</p>') !!}
                         </div>
 
                         <hr/>

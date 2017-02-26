@@ -12,9 +12,9 @@
 
         <!-- Custom CSS -->
         <link href="{{ asset('css/simple-sidebar.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/file-input/fileinput.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/file-input/avatar-upload.css') }}" rel="stylesheet">
         <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css">
 
     </head>
     <body>
@@ -91,8 +91,7 @@
 
     @yield('generalCustomJs')
     @yield('specificCustomJs')
-
-    <script src="{{ asset('js/file-input/fileinput.min.js') }}"></script>
-    <script src="{{ asset('js/file-input/avatar-upload.min.js') }}"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
     </body>
 </html>
