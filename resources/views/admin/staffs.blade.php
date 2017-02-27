@@ -8,7 +8,14 @@
         </div>
     @else
         <div class="col-md-8">
+            @php($numBranchesDisplayed = 0)
             @foreach($branches as $branch)
+                @php
+                    if ($numBranchesDisplayed) {
+                        echo '<hr/>';
+                    }
+                    $numBranchesDisplayed++;
+                @endphp
                 <div class="">
                     <h3>{{ $branch->name }}</h3>
                     @php($staffs = $branch->getStaffs())
