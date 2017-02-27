@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Staff;
 use App\Models\User;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use DB;
 
@@ -18,29 +19,40 @@ class UserService
         return base_path().'/public/'.self::UPLOAD_URI;
     }
 
-    public static function register(Request $request, $authType = User::AUTH_TYPE_PATIENT)
+    public static function save(Request $request, $authType = User::AUTH_TYPE_PATIENT)
     {
         DB::beginTransaction();
 
         try {
             $user = new User();
+            if ($userId = $request->get('id')) {
+                $user = User::find($userId);
+                if (!$user || !$user->auth_type == $authType) {
+                    throw new ModelNotFoundException('User does not exist');
+                }
+            } else {
+                $user->password = md5($request->get('password'));
+            }
+
             $user->fill([
                 'auth_type' => $authType,
                 'name'      => $request->get('name'),
-                'email'     => $request->get('email'),
-                'password'  => md5($request->get('password')),
+                'email'     => $request->get('email')
             ])->save();
             switch ($authType) {
                 case User::AUTH_TYPE_STAFF:
-                    $returnedUser = new Staff();
-                    $newFileName = $user->id.'.jpg';
-                    $uploadDir = self::getBaseUploadDir().'/staff';
-                    $request->file('avatar')->move($uploadDir, $newFileName);
+                    $returnedUser = $userId ? Staff::find($userId) : new Staff();
+                    if ($request->files->has('avatar')) {
+                        $newFileName = $user->id.'.jpg';
+                        $uploadDir = self::getBaseUploadDir().'/staff';
+                        $request->file('avatar')->move($uploadDir, $newFileName);
+
+                        $returnedUser->image_url = $newFileName;
+                    }
 
                     $returnedUser->fill([
                         'id'        => $user->id,
-                        'branch_id' => $request->get('branch'),
-                        'image_url' => $newFileName
+                        'branch_id' => $request->get('branch')
                     ])->save();
                     break;
                 case User::AUTH_TYPE_DOCTOR:

@@ -9,24 +9,37 @@
                 <form enctype="multipart/form-data" method="POST"
                       action="{{ url('admin/staffs/save') }}" class="form-horizontal row">
                     <div class="col-md-offset-1 col-md-10">
-                        <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
-                            <label class="col-sm-2 control-label">Email</label>
-                            <div class="col-sm-10">
-                                <input type="email" class="form-control" name="email" placeholder="Email" value="{{ old('email') ?: $email }}">
-                                {!! $errors->first('email', "<p class='help-block'>:message</p>") !!}
+                        @if($id)
+                            <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
+                                <label class="col-sm-2 control-label">Email</label>
+                                <div class="col-sm-6">
+                                    <input type="email" class="form-control" name="email" placeholder="Email" value="{{ old('email') ?: $email }}">
+                                    {!! $errors->first('email', "<p class='help-block'>:message</p>") !!}
+                                </div>
+                                <div class="col-sm-4">
+                                    <a href="#" class="btn btn-primary">Change Password</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group {{ $errors->has('password') || $errors->has('password_confirmation') ? 'has-error' : '' }}">
-                            <label class="col-sm-2 control-label">Password</label>
-                            <div class="col-sm-5">
-                                <input type="password" class="form-control" name="password" placeholder="Password" value="{{ old('password') }}">
+                        @else
+                            <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
+                                <label class="col-sm-2 control-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" name="email" placeholder="Email" value="{{ old('email') ?: $email }}">
+                                    {!! $errors->first('email', "<p class='help-block'>:message</p>") !!}
+                                </div>
                             </div>
-                            <div class="col-sm-5">
-                                <input type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" value="{{ old('password_confirmation') }}">
+                            <div class="form-group {{ $errors->has('password') || $errors->has('password_confirmation') ? 'has-error' : '' }}">
+                                <label class="col-sm-2 control-label">Password</label>
+                                <div class="col-sm-5">
+                                    <input type="password" class="form-control" name="password" placeholder="Password" value="{{ old('password') }}">
+                                </div>
+                                <div class="col-sm-5">
+                                    <input type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" value="{{ old('password_confirmation') }}">
+                                </div>
+                                {!! $errors->first('password', '<p class="help-block col-sm-offset-2 col-sm-10">:message</p>') !!}
+                                {!! $errors->first('password_confirmation', '<p class="help-block col-sm-offset-2 col-sm-10">:message</p>') !!}
                             </div>
-                            {!! $errors->first('password', '<p class="help-block col-sm-offset-2 col-sm-10">:message</p>') !!}
-                            {!! $errors->first('password_confirmation', '<p class="help-block col-sm-offset-2 col-sm-10">:message</p>') !!}
-                        </div>
+                        @endif
 
                         <hr/>
                         <div class="col-sm-4">
@@ -79,7 +92,7 @@
                         <div class="form-group">
                             <div class="col-sm-12 text-center">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <input type="hidden" name="staffId" value="{{ $id }}">
+                                <input type="hidden" name="id" value="{{ $id }}">
                                 <button class="btn btn-sm btn-primary btn-block" type="submit">Submit</button>
                             </div>
                         </div>

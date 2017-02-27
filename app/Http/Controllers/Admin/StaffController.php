@@ -24,21 +24,44 @@ class StaffController extends Controller
 
     public function save(Request $request)
     {
-        $this->validate($request, [
-            'name'                  => 'required|min:1|max:255',
-            'email'                 => 'required|unique:user|max:255',
-            'password'              => 'required|min:8|max:16|confirmed',
-            'password_confirmation' => 'required|min:8|max:16',
-            'branch'                => 'required|unique:branch,id,'.$request->get('branch'),
-            'avatar'                => 'required|mimes:jpeg,jpg,png|max:2048',
-        ]);
+        DB::beginTransaction();
+        try {
+            $rules = array(
+                'name'                  => 'required|min:1|max:255',
+                'branch'                => 'required|unique:branch,id,'.$request->get('branch'),
+            );
+            $additionalRules = array();
+            if ($isExisting = (bool) $request->get('id')) {
+                if ($request->files->has('avatar')) {
+                    $additionalRules['avatar'] = 'required|mimes:jpeg,jpg,png|max:2048';
+                }
+            } else {
+                $additionalRules = array(
+                    'email'                 => 'required|unique:user|max:255',
+                    'password'              => 'required|min:8|max:16|confirmed',
+                    'password_confirmation' => 'required|min:8|max:16',
+                    'avatar'                => 'required|mimes:jpeg,jpg,png|max:2048'
+                );
+            }
 
-        $staff = UserService::register($request, User::AUTH_TYPE_STAFF);
+            $rules = array_merge($rules, $additionalRules);
+            $this->validate($request, $rules);
 
-        return redirect('admin/staffs')->with(
-            'success',
-            'A new staff has been added to '.$staff->getBranch()->name.' branch'
-        );
+            $staff = UserService::save($request, User::AUTH_TYPE_STAFF);
+            $successMessage = $isExisting
+                ? 'All changes made to '.$staff->getUser()->name.' has been successfully saved'
+                : 'A new staff has been added to '.$staff->getBranch()->name.' branch';
+
+            $message = array('success' => $successMessage);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            $message = array(
+                'error' => $e->getMessage()
+            );
+        }
+
+        return redirect('admin/staffs')->with($message);
     }
 
     public function delete($id)
