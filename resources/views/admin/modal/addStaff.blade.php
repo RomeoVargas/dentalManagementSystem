@@ -64,7 +64,7 @@
                                     @php($branches = \App\Models\Branch::all())
                                     <select name="branch" class="form-control">
                                         @foreach($branches as $branch)
-                                            <option value="{{ $branch->id }}">{{ $branch->name }}</option>
+                                            <option value="{{ $branch->id }}" {{ $branch->id != old('branch') ?: 'selected' }}>{{ $branch->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>

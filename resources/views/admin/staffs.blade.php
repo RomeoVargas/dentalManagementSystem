@@ -1,24 +1,27 @@
 @extends('layout.main')
 @section('content')
-    @if($branches->count() == 0)
-        <div class="alert alert-warning">
-            <strong>There are no branches to add staffs with. Click
-                <a href="#" data-toggle="modal" data-target="#addBranchModal">here</a>
-                to add one now!</strong>
-        </div>
-    @else
-        <div class="col-md-8">
-            @php($numBranchesDisplayed = 0)
-            @foreach($branches as $branch)
-                @php
-                    if ($numBranchesDisplayed) {
-                        echo '<hr/>';
-                    }
-                    $numBranchesDisplayed++;
-                @endphp
-                <div class="">
-                    <h3>{{ $branch->name }}</h3>
-                    @php($staffs = $branch->getStaffs())
+    <h1>Staffs</h1>
+    <div class="col-md-12">
+        @if($branches->count() == 0)
+            <div class="alert alert-warning">
+                <strong>
+                    There are no branches to add staffs with. Click
+                    <a href="#" data-toggle="modal" data-target="#addBranchModal">here</a>
+                    to add one now!
+                </strong>
+            </div>
+        @else
+            <div class="col-md-8">
+                @php($numBranchesDisplayed = 0)
+                @foreach($branches as $branch)
+                    @php
+                        if ($numBranchesDisplayed) {
+                            echo '<hr/>';
+                        }
+                        $numBranchesDisplayed++;
+                        $staffs = $branch->getStaffs();
+                    @endphp
+                    <h4>{{ $branch->name }}</h4>
                     @if($staffs->count() == 0)
                         <div class="alert alert-warning">
                             <strong>There are no staff added to this branch yet</strong>
@@ -52,11 +55,11 @@
                             @endforeach
                         </table>
                     @endif
-                </div>
-            @endforeach
-        </div>
-        <a href="#" class="fixed-fab" data-toggle="modal" data-target="#addStaffModal"><i class="glyphicon glyphicon-plus-sign"></i></a>
-    @endif
+                @endforeach
+            </div>
+            <a href="#" class="fixed-fab" data-toggle="modal" data-target="#addStaffModal"><i class="glyphicon glyphicon-plus-sign"></i></a>
+        @endif
+    </div>
 @endsection
 
 @section('modal')
