@@ -2,8 +2,13 @@
 
 namespace App\Models;
 
-class User
+class User extends AppModel
 {
+    const AUTH_TYPE_PATIENT = 0;
+    const AUTH_TYPE_DOCTOR  = 200;
+    const AUTH_TYPE_STAFF   = 201;
+    const AUTH_TYPE_ADMIN   = 500;
+
     const MAX_LENGTH_EMAIL = 50;
 
     /**

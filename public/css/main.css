@@ -2,6 +2,7 @@ body {
     background: linear-gradient( rgba(999, 999, 999, 0.7), rgba(999, 999, 999, 0.7) ), url("../img/repeating-bg.jpg");
     background-size: 20%;
     background-repeat: repeat;
+    font-family: Tahoma, Helvetica, Arial;
 }
 
 .fixed-fab {

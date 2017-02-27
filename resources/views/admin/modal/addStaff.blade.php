@@ -6,7 +6,8 @@
                 <h4 class="modal-title">Add Staff</h4>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ url('admin/staffs/add') }}" class="form-horizontal row">
+                <form enctype="multipart/form-data" method="POST"
+                      action="{{ url('admin/staffs/add') }}" class="form-horizontal row">
                     <div class="col-md-offset-1 col-md-10">
                         <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                             <label class="col-sm-2 control-label">Email</label>
@@ -29,7 +30,7 @@
 
                         <hr/>
                         <div class="col-sm-4">
-                            <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
+                            <div class="form-group {{ $errors->has('avatar') ? 'has-error' : '' }}">
                                 <div class="col-sm-12">
                                     <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                                         <div class="fileinput-new thumbnail" style="width: 150px; height: 150px;">
@@ -40,13 +41,13 @@
                                             <span class="btn btn-default btn-file">
                                                 <span class="fileinput-new">Select image</span>
                                                 <span class="fileinput-exists">Change</span>
-                                                <input type="file" accept=".jpg,.jpeg,.png" name="image">
+                                                <input type="file" name="avatar" class="form-control">
                                             </span>
                                             <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
                                         </div>
                                     </div>
                                 </div>
-                                {!! $errors->first('image', '<p class="help-block col-sm-offset-2 col-sm-10">:message</p>') !!}
+                                {!! $errors->first('avatar', '<p class="help-block col-sm-offset-2 col-sm-10">:message</p>') !!}
                             </div>
                         </div>
                         <div class="col-sm-offset-1 col-sm-7 text-left">

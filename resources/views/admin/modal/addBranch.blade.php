@@ -41,7 +41,7 @@
     @if(count($errors) > 0)
         <script>
             $(window).load(function(){
-                $('#registerModal').modal('show');
+                $('#addBranch').modal('show');
             });
         </script>
     @endif

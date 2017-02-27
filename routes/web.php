@@ -40,6 +40,8 @@ Route::get('admin/dentists', function () {
     return view('admin.dentists');
 });
 Route::get('admin/staffs', 'Admin\StaffController@getAll');
+Route::post('admin/staffs/add', 'Admin\StaffController@create');
+Route::get('admin/staffs/delete/{id}', 'Admin\StaffController@delete');
 Route::get('admin/branches', 'Admin\BranchController@getAll');
 Route::post('admin/branches/add', 'Admin\BranchController@create');
 

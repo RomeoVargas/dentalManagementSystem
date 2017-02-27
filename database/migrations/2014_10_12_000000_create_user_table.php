@@ -19,7 +19,7 @@ class CreateUserTable extends Migration
             $table->string('name');
             $table->string('email', \App\Models\User::MAX_LENGTH_EMAIL)->unique();
             $table->string('password');
-            $table->dateTime('last_logged_in_at');
+            $table->dateTime('last_logged_in_at')->nullable();
             $table->timestamps();
         });
     }
