@@ -42,7 +42,9 @@
                                             <strong>Email:</strong> {{ $user->email }}
                                         </div>
                                         <div class="col-sm-12">
-                                            <a href="#" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                                            <a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addStaffModal{{$user->id}}">
+                                                <i class="glyphicon glyphicon-edit"></i> Edit
+                                            </a>
                                             <a data-href="{{ url('admin/staffs/delete', ['id' => $user->id]) }}" data-toggle="modal"
                                                data-item-type="staff" data-item-name="{{ $user->name }}"
                                                data-target="#confirm-delete" class="btn btn-sm btn-danger"
@@ -57,7 +59,7 @@
                     @endif
                 @endforeach
             </div>
-            <a href="#" class="fixed-fab" data-toggle="modal" data-target="#addStaffModal"><i class="glyphicon glyphicon-plus-sign"></i></a>
+            <a href="#" class="fixed-fab" data-toggle="modal" data-target="#addStaffModal" onclick="@php($staffUser = null)"><i class="glyphicon glyphicon-plus-sign"></i></a>
         @endif
     </div>
 @endsection
@@ -66,6 +68,26 @@
     @if($branches->count() == 0)
         @include('admin.modal.addBranch')
     @else
+        @php
+            $id = null;
+            $name = null;
+            $email = null;
+            $avatar = null;
+            $branch = null;
+        @endphp
         @include('admin.modal.addStaff')
+        @foreach($branches as $branch)
+            @foreach($branch->getStaffs() as $staff)
+                @php
+                    $user = $staff->getUser();
+                    $id = $user->id;
+                    $name = $user->name;
+                    $email = $user->email;
+                    $avatar = $staff->getImage();
+                    $branch = $staff->branch_id;
+                @endphp
+                @include('admin.modal.addStaff')
+            @endforeach
+        @endforeach
     @endif
 @endsection

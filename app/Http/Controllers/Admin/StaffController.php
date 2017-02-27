@@ -22,7 +22,7 @@ class StaffController extends Controller
         ]);
     }
 
-    public function create(Request $request)
+    public function save(Request $request)
     {
         $this->validate($request, [
             'name'                  => 'required|min:1|max:255',
