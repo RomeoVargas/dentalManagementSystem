@@ -44,6 +44,7 @@ Route::post('admin/staffs/add', 'Admin\StaffController@create');
 Route::get('admin/staffs/delete/{id}', 'Admin\StaffController@delete');
 Route::get('admin/branches', 'Admin\BranchController@getAll');
 Route::post('admin/branches/add', 'Admin\BranchController@create');
+Route::get('admin/branches/delete/{id}', 'Admin\BranchController@delete');
 
 
 Route::get('/dentist', function () {

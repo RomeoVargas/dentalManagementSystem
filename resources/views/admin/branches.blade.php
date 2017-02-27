@@ -19,7 +19,12 @@
                         <td>{{ $branch->address }}</td>
                         <td>
                             <a href="#" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>
-                            <a href="#" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i> Delete</a>
+                            <a data-href="{{ url('admin/branches/delete', ['id' => $branch->id]) }}" data-toggle="modal"
+                               data-item-type="branch" data-item-name="{{ $branch->name }}"
+                               data-target="#confirm-delete" class="btn btn-sm btn-danger"
+                            >
+                                <i class="glyphicon glyphicon-remove"></i> Delete
+                            </a>
                         </td>
                     </tr>
                 @endforeach
