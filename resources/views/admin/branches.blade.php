@@ -18,7 +18,9 @@
                         <td>{{ $branch->name }}</td>
                         <td>{{ $branch->address }}</td>
                         <td>
-                            <a href="#" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                            <a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addBranchModal{{$branch->id}}">
+                                <i class="glyphicon glyphicon-edit"></i> Edit
+                            </a>
                             <a data-href="{{ url('admin/branches/delete', ['id' => $branch->id]) }}" data-toggle="modal"
                                data-item-type="branch" data-item-name="{{ $branch->name }}"
                                data-target="#confirm-delete" class="btn btn-sm btn-danger"
@@ -36,5 +38,28 @@
 @endsection
 
 @section('modal')
+    @php
+        $id = null;
+        $name = null;
+        $address = null;
+    @endphp
     @include('admin.modal.addBranch')
+    @foreach($branches as $branch)
+        @php
+            $id = $branch->id;
+            $name = $branch->name;
+            $address = $branch->address;
+        @endphp
+        @include('admin.modal.addBranch')
+    @endforeach
+@endsection
+
+@section('specificCustomJs')
+    @if(count($errors) > 0)
+        <script>
+            $(window).load(function(){
+                $('#addBranchModal{{ session('branchId') }}').modal('show');
+            });
+        </script>
+    @endif
 @endsection

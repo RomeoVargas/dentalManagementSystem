@@ -8,6 +8,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Validator;
 
 class BranchController extends Controller
 {
@@ -20,20 +21,36 @@ class BranchController extends Controller
         ]);
     }
 
-    public function create(Request $request)
+    public function save(Request $request)
     {
-        $this->validate($request, [
-            'name'      => 'required|unique:branch|max:255',
-            'address'   => 'required'
-        ]);
+        $rules = array(
+            'address'   => 'required',
+            'name'      => 'required|max:255|unique:branch'
+        );
+        if ($branchId = $request->get('id')) {
+            $rules['name'] = 'required|max:255|unique:branch,name,'.$branchId;
+        }
 
-        $branch = new Branch();
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return redirect('admin/branches')
+                ->with(['branchId' => $branchId])
+                ->withErrors($validator);
+        }
+
+        $branch = $branchId ? Branch::find($branchId) : new Branch();
+        if (!$branch) {
+            throw new ModelNotFoundException('Branch does not exist');
+        }
         $branch->fill([
             'name'      => $request->get('name'),
             'address'   => $request->get('address')
         ])->save();
+        $successMessage = $branchId
+            ? 'Changes to branch '.$branch->name.' has been saved'
+            : 'A new branch has now been added';
 
-        return redirect('admin/branches')->with('success', 'A new branch has now been added');
+        return redirect('admin/branches')->with('success', $successMessage);
     }
 
     public function delete($id)

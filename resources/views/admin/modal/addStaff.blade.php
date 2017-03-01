@@ -102,13 +102,3 @@
         </div>
     </div>
 </div>
-
-@section('specificCustomJs')
-    @if(count($errors) > 0)
-        <script>
-            $(window).load(function(){
-                $('#addStaffModal{{ session('staffId') }}').modal('show');
-            });
-        </script>
-    @endif
-@endsection

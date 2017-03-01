@@ -91,3 +91,18 @@
         @endforeach
     @endif
 @endsection
+
+@section('specificCustomJs')
+    @if(count($errors) > 0)
+        @php
+            $modalId = session()->has('branchId')
+                ? 'addBranchModal'.session('branchId')
+                : 'addStaffModal'.session('staffId')
+        @endphp
+        <script>
+            $(window).load(function(){
+                $('#{{ $modalId }}').modal('show');
+            });
+        </script>
+    @endif
+@endsection

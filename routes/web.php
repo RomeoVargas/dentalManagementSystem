@@ -42,8 +42,9 @@ Route::get('admin/dentists', function () {
 Route::get('admin/staffs', 'Admin\StaffController@getAll');
 Route::post('admin/staffs/save', 'Admin\StaffController@save');
 Route::get('admin/staffs/delete/{id}', 'Admin\StaffController@delete');
+
 Route::get('admin/branches', 'Admin\BranchController@getAll');
-Route::post('admin/branches/add', 'Admin\BranchController@create');
+Route::post('admin/branches/save', 'Admin\BranchController@save');
 Route::get('admin/branches/delete/{id}', 'Admin\BranchController@delete');
 
 
