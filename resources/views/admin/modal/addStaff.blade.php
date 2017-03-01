@@ -107,7 +107,7 @@
     @if(count($errors) > 0)
         <script>
             $(window).load(function(){
-                $('#addStaffModal{{$id}}').modal('show');
+                $('#addStaffModal{{ session('staffId') }}').modal('show');
             });
         </script>
     @endif

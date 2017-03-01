@@ -10,6 +10,7 @@ use App\Services\UserService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Validator;
 
 class StaffController extends Controller
 {
@@ -31,13 +32,14 @@ class StaffController extends Controller
                 'branch'                => 'required|unique:branch,id,'.$request->get('branch'),
             );
             $additionalRules = array();
-            if ($isExisting = (bool) $request->get('id')) {
+            if ($staffId = $request->get('id')) {
+                $additionalRules['email'] = 'required|max:255|email|unique:user,email,'.$staffId;
                 if ($request->files->has('avatar')) {
                     $additionalRules['avatar'] = 'required|mimes:jpeg,jpg,png|max:2048';
                 }
             } else {
                 $additionalRules = array(
-                    'email'                 => 'required|unique:user|max:255',
+                    'email'                 => 'required|max:255|email|unique:user',
                     'password'              => 'required|min:8|max:16|confirmed',
                     'password_confirmation' => 'required|min:8|max:16',
                     'avatar'                => 'required|mimes:jpeg,jpg,png|max:2048'
@@ -45,10 +47,16 @@ class StaffController extends Controller
             }
 
             $rules = array_merge($rules, $additionalRules);
-            $this->validate($request, $rules);
+
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return redirect('admin/staffs')
+                    ->with(['staffId' => $staffId])
+                    ->withErrors($validator);
+            }
 
             $staff = UserService::save($request, User::AUTH_TYPE_STAFF);
-            $successMessage = $isExisting
+            $successMessage = $staffId
                 ? 'All changes made to '.$staff->getUser()->name.' has been successfully saved'
                 : 'A new staff has been added to '.$staff->getBranch()->name.' branch';
 
