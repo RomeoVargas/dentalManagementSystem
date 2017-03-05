@@ -36,9 +36,10 @@ Route::get('admin', function () {
 Route::get('admin/dashboard', function () {
     return view('admin.dashboard');
 });
-Route::get('admin/dentists', function () {
-    return view('admin.dentists');
-});
+Route::get('admin/dentists', 'Admin\DentistController@getAll');
+Route::post('admin/dentists/save', 'Admin\DentistController@save');
+Route::get('admin/dentists/delete/{id}', 'Admin\DentistController@delete');
+
 Route::get('admin/staffs', 'Admin\StaffController@getAll');
 Route::post('admin/staffs/save', 'Admin\StaffController@save');
 Route::get('admin/staffs/delete/{id}', 'Admin\StaffController@delete');

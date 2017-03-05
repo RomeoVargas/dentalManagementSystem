@@ -31,10 +31,10 @@
                             @foreach($staffs as $staff)
                                 @php($user = $staff->getUser())
                                 <tr>
-                                    <td class="col-sm-2">
+                                    <td class="col-sm-4">
                                         <img src="{{ $staff->getImage() }}" style="width: 100%">
                                     </td>
-                                    <td class="col-sm-10">
+                                    <td class="col-sm-8">
                                         <div class="col-sm-12">
                                             <strong>Name:</strong> {{ $user->name }}
                                         </div>

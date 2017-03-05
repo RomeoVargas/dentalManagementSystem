@@ -5,7 +5,7 @@ namespace App\Models;
 class User extends AppModel
 {
     const AUTH_TYPE_PATIENT = 0;
-    const AUTH_TYPE_DOCTOR  = 200;
+    const AUTH_TYPE_DENTIST = 200;
     const AUTH_TYPE_STAFF   = 201;
     const AUTH_TYPE_ADMIN   = 500;
 

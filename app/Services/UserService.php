@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Dentist;
 use App\Models\Staff;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -40,31 +41,36 @@ class UserService
                 'email'     => $request->get('email')
             ])->save();
             switch ($authType) {
-                case User::AUTH_TYPE_STAFF:
+            case User::AUTH_TYPE_STAFF:
+            case User::AUTH_TYPE_DENTIST:
+                if ($authType == User::AUTH_TYPE_DENTIST) {
+                    $returnedUser = $userId ? Dentist::find($userId) : new Dentist();
+                    $returnedUser->introduction = $request->get('introduction');
+                    $dirName = 'dentist';
+                } else {
                     $returnedUser = $userId ? Staff::find($userId) : new Staff();
-                    if ($request->files->has('avatar')) {
-                        $newFileName = $user->id.'.jpg';
-                        $uploadDir = self::getBaseUploadDir().'/staff';
-                        $request->file('avatar')->move($uploadDir, $newFileName);
+                    $dirName = 'staff';
+                }
+                if ($request->files->has('avatar'.$userId)) {
+                    $newFileName = $user->id.'.jpg';
+                    $uploadDir = self::getBaseUploadDir().'/'.$dirName;
+                    $request->file('avatar')->move($uploadDir, $newFileName);
 
-                        $returnedUser->image_url = $newFileName;
-                    }
+                    $returnedUser->image_url = $newFileName;
+                }
 
-                    $returnedUser->fill([
-                        'id'        => $user->id,
-                        'branch_id' => $request->get('branch')
-                    ])->save();
-                    break;
-                case User::AUTH_TYPE_DOCTOR:
-                    // Add a new doctor here
-                    $returnedUser = $user;
-                    break;
-                case User::AUTH_TYPE_PATIENT:
-                case User::AUTH_TYPE_ADMIN:
-                    $returnedUser = $user;
-                    break;
-                default:
-                    throw new \InvalidArgumentException('Invalid auth type');
+
+                $returnedUser->fill([
+                    'id'        => $user->id,
+                    'branch_id' => $request->get('branch')
+                ])->save();
+                break;
+            case User::AUTH_TYPE_PATIENT:
+            case User::AUTH_TYPE_ADMIN:
+                $returnedUser = $user;
+                break;
+            default:
+                throw new \InvalidArgumentException('Invalid auth type');
             }
 
             DB::commit();
