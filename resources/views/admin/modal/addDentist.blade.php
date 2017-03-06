@@ -89,7 +89,7 @@
                             <div class="form-group {{ $errors->has('introduction') ? 'has-error' : '' }}">
                                 <label class="col-sm-12 text-left">Brief Introduction</label>
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control" name="introduction" placeholder="Short intro about the dentist" value="{{ old('introduction') ?: $introduction }}">
+                                    <textarea class="form-control" rows="3" style="resize:none" name="introduction">{{ old('introduction') ?: $introduction }}</textarea>
                                     {!! $errors->first('introduction', "<p class='help-block'>:message</p>") !!}
                                 </div>
                             </div>

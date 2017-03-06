@@ -11,7 +11,7 @@
                 </strong>
             </div>
         @else
-            <div class="col-md-8">
+            <div class="col-md-10">
                 @php($numBranchesDisplayed = 0)
                 @foreach($branches as $branch)
                     @php
@@ -31,10 +31,20 @@
                             @foreach($dentists as $dentist)
                                 @php($user = $dentist->getUser())
                                 <tr>
-                                    <td class="col-sm-4">
+                                    <td class="col-sm-5">
                                         <img src="{{ $dentist->getImage() }}" style="width: 100%">
+                                        <div class="text-right">
+                                        <a href="#" class="col-sm-6 btn btn-sm btn-primary" style="border-radius: 0;"
+                                           data-toggle="modal" data-target="#addDentistModal{{$user->id}}">
+                                            <i class="glyphicon glyphicon-edit"></i> Edit
+                                        </a><a data-href="{{ url('admin/dentists/delete', ['id' => $user->id]) }}" style="border-radius: 0;"
+                                               data-toggle="modal" data-item-type="dentist" data-item-name="{{ $user->name }}"
+                                               data-target="#confirm-delete" class="col-sm-6 btn btn-sm btn-danger">
+                                            <i class="glyphicon glyphicon-remove"></i> Delete
+                                        </a>
+                                        </div>
                                     </td>
-                                    <td class="col-sm-8">
+                                    <td class="col-sm-7">
                                         <div class="col-sm-12">
                                             <strong>Name:</strong> {{ $user->name }}
                                         </div>
@@ -45,15 +55,39 @@
                                             <strong>Introduction:</strong> {{ $dentist->introduction }}
                                         </div>
                                         <div class="col-sm-12">
-                                            <a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addDentistModal{{$user->id}}">
-                                                <i class="glyphicon glyphicon-edit"></i> Edit
-                                            </a>
-                                            <a data-href="{{ url('admin/dentists/delete', ['id' => $user->id]) }}" data-toggle="modal"
-                                               data-item-type="dentist" data-item-name="{{ $user->name }}"
-                                               data-target="#confirm-delete" class="btn btn-sm btn-danger"
-                                            >
-                                                <i class="glyphicon glyphicon-remove"></i> Delete
-                                            </a>
+                                            <strong>Schedule:</strong>
+                                            <div class="col-sm-offset-1 col-sm-10">
+                                                <table class="table table-bordered">
+                                                    <tr>
+                                                        <th class="text-right">Monday</th>
+                                                        <td>1:30pm - 3:30pm</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="text-right">Tuesday</th>
+                                                        <td>1:30pm - 3:30pm</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="text-right">Wednesday</th>
+                                                        <td>1:30pm - 3:30pm</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="text-right">Thursday</th>
+                                                        <td>1:30pm - 3:30pm</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="text-right">Friday</th>
+                                                        <td>1:30pm - 3:30pm</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="text-right">Saturday</th>
+                                                        <td>1:30pm - 3:30pm</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="text-right">Sunday</th>
+                                                        <td>1:30pm - 3:30pm</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>

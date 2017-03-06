@@ -9,13 +9,6 @@
     <a class="{{ $activeUrl != $routeName ?: 'active' }}" href="{{ url($activeUrl) }}">
         <i class="glyphicon glyphicon-user"></i>&nbsp Dentists
     </a>
-    <a href="#">
-        <ul>
-            <li>
-                <i class="glyphicon glyphicon-time"></i>&nbsp Dentist Schedules
-            </li>
-        </ul>
-    </a>
 </li>
 <li>
     @php($activeUrl = 'admin/staffs')
