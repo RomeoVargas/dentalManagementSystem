@@ -4,6 +4,12 @@ $(".nav .navbar-item").on("click", function(){
 });
 
 $(document).ready(function() {
+    $('.schedToggle').change(function() {
+        var parentClass = $(this).parent();
+        var isDisabled = parentClass.hasClass('off');
+        parentClass.parent().siblings('td').find('input').prop('disabled', isDisabled);
+    });
+
     $('#confirm-delete').on('show.bs.modal', function(e) {
         $(this).find('#delete-item-type').text($(e.relatedTarget).data('item-type'));
         $(this).find('#delete-item-name').text('• ' + $(e.relatedTarget).data('item-name'));

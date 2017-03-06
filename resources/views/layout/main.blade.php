@@ -9,7 +9,7 @@
         <link href="{{ asset('css/bootstrap/bootstrap-theme.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/jasny-bootstrap/jasny-bootstrap.min.css') }}" rel="stylesheet">
-
+        <link href="{{ asset('css/bootstrap-toggle/bootstrap-toggle.min.css') }}" rel="stylesheet">
 
         <!-- Custom CSS -->
         <link href="{{ asset('css/simple-sidebar.css') }}" rel="stylesheet">
@@ -81,6 +81,7 @@
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/jasny-bootstrap/jasny-bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-toggle/bootstrap-toggle.min.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
     <!-- Menu Toggle Script -->
     <script>

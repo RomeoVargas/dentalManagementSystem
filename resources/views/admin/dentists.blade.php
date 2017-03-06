@@ -86,6 +86,14 @@
                                                         <th class="text-right">Sunday</th>
                                                         <td>1:30pm - 3:30pm</td>
                                                     </tr>
+                                                    <tr>
+                                                        <td class="text-center" colspan="2">
+                                                            <a href="#" class="btn btn-sm btn-warning"
+                                                               data-toggle="modal" data-target="#dentistScheduleModal{{$user->id}}">
+                                                                Update Schedule
+                                                            </a>
+                                                        </td>
+                                                    </tr>
                                                 </table>
                                             </div>
                                         </div>
@@ -126,6 +134,7 @@
                     $introduction = $dentist->introduction;
                 @endphp
                 @include('admin.modal.addDentist')
+                @include('admin.modal.dentistSchedule')
             @endforeach
         @endforeach
     @endif
