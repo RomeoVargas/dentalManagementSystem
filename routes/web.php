@@ -38,6 +38,7 @@ Route::get('admin/dashboard', function () {
 });
 Route::get('admin/dentists', 'Admin\DentistController@getAll');
 Route::post('admin/dentists/save', 'Admin\DentistController@save');
+Route::post('admin/dentists/schedule/save', 'Admin\DentistController@saveSchedule');
 Route::get('admin/dentists/delete/{id}', 'Admin\DentistController@delete');
 
 Route::get('admin/staffs', 'Admin\StaffController@getAll');

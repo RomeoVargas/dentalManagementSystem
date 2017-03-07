@@ -58,34 +58,12 @@
                                             <strong>Schedule:</strong>
                                             <div class="col-sm-offset-1 col-sm-10">
                                                 <table class="table table-bordered">
-                                                    <tr>
-                                                        <th class="text-right">Monday</th>
-                                                        <td>1:30pm - 3:30pm</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="text-right">Tuesday</th>
-                                                        <td>1:30pm - 3:30pm</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="text-right">Wednesday</th>
-                                                        <td>1:30pm - 3:30pm</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="text-right">Thursday</th>
-                                                        <td>1:30pm - 3:30pm</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="text-right">Friday</th>
-                                                        <td>1:30pm - 3:30pm</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="text-right">Saturday</th>
-                                                        <td>1:30pm - 3:30pm</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="text-right">Sunday</th>
-                                                        <td>1:30pm - 3:30pm</td>
-                                                    </tr>
+                                                    @foreach($dentist->getScheduleData() as $day => $schedule)
+                                                        <tr>
+                                                            <th class="text-right">{{ ucfirst($day) }}</th>
+                                                            <td>{{ $schedule['from'] }} - {{ $schedule['to'] }}</td>
+                                                        </tr>
+                                                    @endforeach
                                                     <tr>
                                                         <td class="text-center" colspan="2">
                                                             <a href="#" class="btn btn-sm btn-warning"
@@ -125,6 +103,7 @@
         @foreach($branches as $branch)
             @foreach($branch->getDentists() as $dentist)
                 @php
+                    $currentSchedule = $dentist->getScheduleData();
                     $user = $dentist->getUser();
                     $id = $user->id;
                     $name = $user->name;

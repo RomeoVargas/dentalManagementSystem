@@ -34,6 +34,11 @@ class Dentist extends AppModel
         return $this->belongsTo(Branch::class, 'branch_id')->getResults();
     }
 
+    public function getSchedule()
+    {
+        return $this->hasMany(DentistSchedule::class, 'dentist_id')->getResults();
+    }
+
     public function getImage()
     {
         $imageUrl = UserService::UPLOAD_URI.'/dentist/'.$this->image_url;
@@ -43,5 +48,21 @@ class Dentist extends AppModel
         }
 
         return asset($imageUrl);
+    }
+
+    public function getScheduleData()
+    {
+        $scheduleData = array();
+        foreach ($this->getSchedule() as $schedule) {
+            $days = explode(',', $schedule->days);
+            foreach ($days as $day) {
+                $scheduleData[$day] = array(
+                    'from' => to_time_format($schedule->time_start),
+                    'to' => to_time_format($schedule->time_end),
+                );
+            }
+        }
+
+        return $scheduleData;
     }
 }

@@ -6,7 +6,7 @@
                 <h4 class="modal-title">{{ $user->name }} - Schedule</h4>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ url('admin/branches/save') }}" class="form-horizontal row">
+                <form method="POST" action="{{ url('admin/dentists/schedule/save') }}" class="form-horizontal row">
                     <div class="col-md-offset-1 col-md-10">
 
                         <table class="table table-bordered">

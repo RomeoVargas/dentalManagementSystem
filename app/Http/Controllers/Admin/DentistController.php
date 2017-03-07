@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Branch;
 use App\Models\Dentist;
+use App\Models\DentistSchedule;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -63,6 +64,55 @@ class DentistController extends Controller
                 : 'A new staff has been added to '.$dentist->getBranch()->name.' branch';
 
             $message = array('success' => $successMessage);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            $message = array(
+                'error' => $e->getMessage()
+            );
+        }
+
+        return redirect('admin/dentists')->with($message);
+    }
+
+    public function saveSchedule(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $dentistId = $request->get('id');
+            if (!$dentist = Dentist::find($dentistId)) {
+                throw new ModelNotFoundException('Dentist does not exist');
+            }
+
+            // Remove all schedules first
+            foreach ($dentist->getSchedule() as $schedule) {
+                $schedule->delete();
+            }
+
+            $schedules = array();
+            foreach (DentistSchedule::DAYS as $day) {
+                if (($dayFrom = $request->get($day.'From')) && ($dayTo = $request->get($day.'To'))) {
+                    if (strtotime($dayTo) > strtotime($dayFrom)) {
+                        throw new \InvalidArgumentException('Schedule time(s) must have a valid value');
+                    }
+
+                    $schedule = $dayFrom.' - '.$dayTo;
+                    if (isset($schedules[$schedule])) {
+                        $schedules[$schedule]->days .= ','.$day;
+                        $schedules[$schedule]->save();
+                    } else {
+                        $schedules[$schedule] = new DentistSchedule();
+                        $schedules[$schedule]->fill([
+                            'dentist_id' => $dentistId,
+                            'days' => $day,
+                            'time_start' => $dayFrom,
+                            'time_end' => $dayTo,
+                        ])->save();
+                    }
+                }
+            }
+
+            $message = array('success' => 'The schedule of '.$dentist->getUser()->name.' has been successfully updated');
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
