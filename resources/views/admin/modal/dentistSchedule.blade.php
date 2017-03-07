@@ -12,65 +12,114 @@
                         <table class="table table-bordered">
                             <tr>
                                 <th>
-                                    <input checked class="schedToggle" type="checkbox" data-toggle="toggle" data-size="small">
+                                    <input {{ !isset($currentSchedule['monday']) ?: 'checked' }} class="schedToggle" type="checkbox" data-toggle="toggle" data-size="small">
                                     Monday
                                 </th>
                                 <td>
-                                    <input type="time" name="mondayFrom"> to <input type="time" name="mondayTo">
+                                    @php
+                                        $mondayDisabled = !isset($currentSchedule['monday']) ? 'disabled' : null;
+                                        $mondayFrom = !$mondayDisabled ? $currentSchedule['monday']['from'] : null;
+                                        $mondayTo = !$mondayDisabled ? $currentSchedule['monday']['to'] : null;
+                                    @endphp
+                                    <input {{$mondayDisabled}} type="time" name="mondayFrom" value="{{ to_time_format($mondayFrom, 'H:i:s') }}">
+                                    to
+                                    <input {{$mondayDisabled}} type="time" name="mondayTo" value="{{ to_time_format($mondayTo, 'H:i:s') }}">
                                 </td>
                             </tr>
                             <tr>
                                 <th>
-                                    <input checked class="schedToggle" type="checkbox" data-toggle="toggle" data-size="small">
+                                    <input {{ !isset($currentSchedule['tuesday']) ?: 'checked' }} class="schedToggle" type="checkbox" data-toggle="toggle" data-size="small">
                                     Tuesday
                                 </th>
                                 <td>
-                                    <input type="time" name="tuesdayFrom"> to <input type="time" name="tuesdayTo">
+                                    @php
+                                        $tuesdayDisabled = !isset($currentSchedule['tuesday']) ? 'disabled' : null;
+                                        $tuesdayFrom = !$tuesdayDisabled ? $currentSchedule['tuesday']['from'] : null;
+                                        $tuesdayTo = !$tuesdayDisabled ? $currentSchedule['tuesday']['to'] : null;
+                                    @endphp
+                                    <input {{$tuesdayDisabled}} type="time" name="tuesdayFrom" value="{{ to_time_format($tuesdayFrom, 'H:i:s') }}">
+                                    to
+                                    <input {{$tuesdayDisabled}} type="time" name="tuesdayTo" value="{{ to_time_format($tuesdayTo, 'H:i:s') }}">
                                 </td>
                             </tr>
                             <tr>
                                 <th>
-                                    <input checked class="schedToggle" type="checkbox" data-toggle="toggle" data-size="small">
+                                    <input {{ !isset($currentSchedule['wednesday']) ?: 'checked' }} class="schedToggle" type="checkbox" data-toggle="toggle" data-size="small">
                                     Wednesday
                                 </th>
                                 <td>
-                                    <input type="time" name="wednesdayFrom"> to <input type="time" name="wednesdayTo">
+                                    @php
+                                        $wednesdayDisabled = !isset($currentSchedule['wednesday']) ? 'disabled' : null;
+                                        $wednesdayFrom = !$wednesdayDisabled ? $currentSchedule['wednesday']['from'] : null;
+                                        $wednesdayTo = !$wednesdayDisabled ? $currentSchedule['wednesday']['to'] : null;
+                                    @endphp
+                                    <input {{$wednesdayDisabled}} type="time" name="wednesdayFrom" value="{{ to_time_format($wednesdayFrom, 'H:i:s') }}">
+                                    to
+                                    <input {{$wednesdayDisabled}} type="time" name="wednesdayTo" value="{{ to_time_format($wednesdayTo, 'H:i:s') }}">
                                 </td>
                             </tr>
                             <tr>
                                 <th>
-                                    <input checked class="schedToggle" type="checkbox" data-toggle="toggle" data-size="small">
+                                    <input {{ !isset($currentSchedule['thursday']) ?: 'checked' }} class="schedToggle" type="checkbox" data-toggle="toggle" data-size="small">
                                     Thursday
                                 </th>
                                 <td>
-                                    <input type="time" name="thursdayFrom"> to <input type="time" name="thursdayTo">
+                                    @php
+                                        $thursdayDisabled = !isset($currentSchedule['thursday']) ? 'disabled' : null;
+                                        $thursdayFrom = !$thursdayDisabled ? $currentSchedule['thursday']['from'] : null;
+                                        $thursdayTo = !$thursdayDisabled ? $currentSchedule['thursday']['to'] : null;
+                                    @endphp
+                                    <input {{$thursdayDisabled}} type="time" name="thursdayFrom" value="{{ to_time_format($thursdayFrom, 'H:i:s') }}">
+                                    to
+                                    <input {{$thursdayDisabled}} type="time" name="thursdayTo" value="{{ to_time_format($thursdayTo, 'H:i:s') }}">
                                 </td>
                             </tr>
                             <tr>
                                 <th>
-                                    <input checked class="schedToggle" type="checkbox" data-toggle="toggle" data-size="small">
+                                    <input {{ !isset($currentSchedule['friday']) ?: 'checked' }} class="schedToggle" type="checkbox" data-toggle="toggle" data-size="small">
                                     Friday
                                 </th>
                                 <td>
-                                    <input type="time" name="fridayFrom"> to <input type="time" name="fridayTo">
+                                    @php
+                                        $fridayDisabled = !isset($currentSchedule['friday']) ? 'disabled' : null;
+                                        $fridayFrom = !$fridayDisabled ? $currentSchedule['friday']['from'] : null;
+                                        $fridayTo = !$fridayDisabled ? $currentSchedule['friday']['to'] : null;
+                                    @endphp
+                                    <input {{$fridayDisabled}} type="time" name="fridayFrom" value="{{ to_time_format($fridayFrom, 'H:i:s') }}">
+                                    to
+                                    <input {{$fridayDisabled}} type="time" name="fridayTo" value="{{ to_time_format($fridayTo, 'H:i:s') }}">
                                 </td>
                             </tr>
                             <tr>
                                 <th>
-                                    <input checked class="schedToggle" type="checkbox" data-toggle="toggle" data-size="small">
+                                    <input {{ !isset($currentSchedule['saturday']) ?: 'checked' }} class="schedToggle" type="checkbox" data-toggle="toggle" data-size="small">
                                     Saturday
                                 </th>
                                 <td>
-                                    <input type="time" name="saturdayFrom"> to <input type="time" name="saturdayTo">
+                                    @php
+                                        $saturdayDisabled = !isset($currentSchedule['saturday']) ? 'disabled' : null;
+                                        $saturdayFrom = !$fridayDisabled ? $currentSchedule['saturday']['from'] : null;
+                                        $saturdayTo = !$fridayDisabled ? $currentSchedule['saturday']['to'] : null;
+                                    @endphp
+                                    <input {{$saturdayDisabled}} type="time" name="saturdayFrom" value="{{ to_time_format($saturdayFrom, 'H:i:s') }}">
+                                    to
+                                    <input {{$saturdayDisabled}} type="time" name="saturdayTo" value="{{ to_time_format($saturdayTo, 'H:i:s') }}">
                                 </td>
                             </tr>
                             <tr>
                                 <th>
-                                    <input checked class="schedToggle" type="checkbox" data-toggle="toggle" data-size="small">
+                                    <input {{ !isset($currentSchedule['sunday']) ?: 'checked' }} class="schedToggle" type="checkbox" data-toggle="toggle" data-size="small">
                                     Sunday
                                 </th>
                                 <td>
-                                    <input type="time" name="sundayFrom"> to <input type="time" name="sundayTo">
+                                    @php
+                                        $sundayDisabled = !isset($currentSchedule['sunday']) ? 'disabled' : null;
+                                        $sundayFrom = !$fridayDisabled ? $currentSchedule['sunday']['from'] : null;
+                                        $sundayTo = !$fridayDisabled ? $currentSchedule['sunday']['to'] : null;
+                                    @endphp
+                                    <input {{$sundayDisabled}} type="time" name="sundayFrom" value="{{ to_time_format($sundayFrom, 'H:i:s') }}">
+                                    to
+                                    <input {{$sundayDisabled}} type="time" name="sundayTo" value="{{ to_time_format($sundayTo, 'H:i:s') }}">
                                 </td>
                             </tr>
                         </table>
