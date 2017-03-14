@@ -51,7 +51,7 @@ class UserService
                     $returnedUser = $userId ? Staff::find($userId) : new Staff();
                     $dirName = 'staff';
                 }
-                if ($request->files->has('avatar'.$userId)) {
+                if ($request->files->has('avatar')) {
                     $newFileName = $user->id.'.jpg';
                     $uploadDir = self::getBaseUploadDir().'/'.$dirName;
                     $request->file('avatar')->move($uploadDir, $newFileName);
